@@ -46,7 +46,7 @@ function onGalleryItemClick(e) {
 
     function closeModalWindowEscBtn(e) {
         if (e.code === 'Escape') {
-            instance.close();
+            instance.close(() => galleryEl.removeEventListener("keydown", closeModalWindowEscBtn));
         };
     };
 };
