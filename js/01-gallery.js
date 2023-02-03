@@ -38,15 +38,18 @@ function onGalleryItemClick(e) {
     const urlImg = e.target.getAttribute('data-source');
     const instance = basicLightbox.create(`
         <img src="${urlImg}" width="800" height="600">
-        `);
+        `, {
+        onClose: () => {
+                galleryEl.removeEventListener("keydown", closeModalWindowEscBtn);
+        }
+    });
     
     instance.show();
 
-    galleryEl.addEventListener("keydown", closeModalWindowEscBtn);
-
+    galleryEl.addEventListener('keydown', closeModalWindowEscBtn);
     function closeModalWindowEscBtn(e) {
         if (e.code === 'Escape') {
-            instance.close(() => galleryEl.removeEventListener("keydown", closeModalWindowEscBtn));
+            instance.close();
         };
     };
 };
